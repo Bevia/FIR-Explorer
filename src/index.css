@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'ss01', 'cv11', 'tnum';
+  }
+  body {
+    @apply bg-bg text-ink antialiased;
+    font-synthesis: none;
+  }
+  /* Light mode swaps via .light class on root */
+  html.light {
+    color-scheme: light;
+  }
+  html.light body {
+    @apply bg-lbg text-link;
+  }
+  /* tabular numerics on metric values */
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: 'tnum', 'cv11';
+  }
+
+  /* === Light-mode color overrides ===
+     The app uses Tailwind utilities (bg-bg, text-ink, text-ink-muted, ...) that
+     reference the dark palette directly. In light mode we remap them via CSS so
+     we don't have to sprinkle `light:` modifiers across every component. */
+  html.light {
+    --c-bg: #F5F6F8;
+    --c-bg-alt: #EDEFF3;
+    --c-bg-surface: #FFFFFF;
+    --c-bg-raised: #FAFBFC;
+    --c-line: #D6DAE0;
+    --c-line-strong: #B7BEC8;
+    --c-ink: #0E1116;
+    --c-ink-muted: #5A6473;
+    --c-ink-faint: #8C95A2;
+  }
+  html.light .bg-bg { background-color: var(--c-bg) !important; }
+  html.light .bg-bg\/85 { background-color: rgba(245, 246, 248, 0.88) !important; }
+  html.light .bg-bg-alt { background-color: var(--c-bg-alt) !important; }
+  html.light .bg-bg-surface { background-color: var(--c-bg-surface) !important; }
+  html.light .bg-bg-raised { background-color: var(--c-bg-raised) !important; }
+  html.light .text-ink { color: var(--c-ink) !important; }
+  html.light .text-ink-muted { color: var(--c-ink-muted) !important; }
+  html.light .text-ink-faint { color: var(--c-ink-faint) !important; }
+  html.light .border-line,
+  html.light .border-line\/60 { border-color: var(--c-line) !important; }
+  html.light .hover\:border-line-strong:hover { border-color: var(--c-line-strong) !important; }
+  html.light .hover\:text-ink:hover { color: var(--c-ink) !important; }
+  html.light .border-l-line,
+  html.light .border-t-line,
+  html.light .border-b-line,
+  html.light .border-r-line { border-color: var(--c-line) !important; }
+}
+
+@layer components {
+  .panel {
+    @apply bg-bg-surface border border-line rounded-lg;
+  }
+  html.light .panel {
+    @apply bg-lbg-surface border-lline;
+  }
+  .panel-raised {
+    @apply bg-bg-raised border border-line rounded-lg;
+  }
+  html.light .panel-raised {
+    @apply bg-lbg-raised border-lline;
+  }
+  .label {
+    @apply text-[11px] uppercase tracking-[0.12em] text-ink-muted font-medium;
+  }
+  html.light .label {
+    @apply text-link-muted;
+  }
+  .hairline {
+    @apply border-line;
+  }
+  html.light .hairline {
+    @apply border-lline;
+  }
+}
+
+/* Custom slider styling — engineering control */
+input[type='range'].fir-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type='range'].fir-slider::-webkit-slider-runnable-track {
+  height: 2px;
+  background: #2E3A48;
+  border-radius: 2px;
+}
+html.light input[type='range'].fir-slider::-webkit-slider-runnable-track {
+  background: #B7BEC8;
+}
+input[type='range'].fir-slider::-moz-range-track {
+  height: 2px;
+  background: #2E3A48;
+  border-radius: 2px;
+}
+html.light input[type='range'].fir-slider::-moz-range-track {
+  background: #B7BEC8;
+}
+input[type='range'].fir-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 2px;
+  background: #22D3EE;
+  margin-top: -6px;
+  box-shadow: 0 0 0 1px #0B0E12, 0 0 8px rgba(34, 211, 238, 0.4);
+  transition: transform 80ms ease;
+}
+input[type='range'].fir-slider::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  border-radius: 2px;
+  background: #22D3EE;
+  border: 1px solid #0B0E12;
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
+}
+input[type='range'].fir-slider:focus::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+/* Scrollbar subtle */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #222C38;
+  border-radius: 6px;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #D6DAE0;
+}
+
+/* Subtle grid background hint */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+html.light .bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
