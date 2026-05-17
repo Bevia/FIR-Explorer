@@ -2,22 +2,64 @@
 
 ![FIR Explorer](assets/FIR-Explorer.png)
 
-# React + TypeScript + Vite
+FIR-Explorer is an interactive React-based tool for exploring FIR filter behavior, frequency response, and DSP concepts visually.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting Started
 
-Currently, two official plugins are available:
+This project is very easy to run locally.
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+You should see an output similar to this:
+
+```bash
+VITE v8.0.13  ready in 747 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+
+Then open the local URL in your browser:
+
+```bash
+http://localhost:5173/
+```
+
+## React + TypeScript + Vite
+
+This project is built with React, TypeScript, and Vite.
+
+Vite provides a fast development environment with Hot Module Replacement, making it convenient to build and iterate on modern frontend applications.
+
+Currently, two official React plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
 ## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The React Compiler is not enabled in this project by default because it may affect development and build performance.
 
-## Expanding the ESLint configuration
+To add it, see the official React documentation:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React Compiler Installation](https://react.dev/learn/react-compiler/installation)
+
+## Expanding the ESLint Configuration
+
+If you are developing this project further as a production application, consider updating the ESLint configuration to enable type-aware lint rules.
+
+Example:
 
 ```js
 export default defineConfig([
@@ -27,11 +69,13 @@ export default defineConfig([
     extends: [
       // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
+      // Replace tseslint.configs.recommended with this:
       tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
+
+      // Or use this for stricter rules:
       tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
+
+      // Optionally, add this for stylistic rules:
       tseslint.configs.stylisticTypeChecked,
 
       // Other configs...
@@ -47,7 +91,12 @@ export default defineConfig([
 ])
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+You can also install React-specific lint plugins:
+
+- [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x)
+- [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom)
+
+Example configuration:
 
 ```js
 // eslint.config.js
@@ -60,9 +109,11 @@ export default defineConfig([
     files: ['**/*.{ts,tsx}'],
     extends: [
       // Other configs...
-      // Enable lint rules for React
+
+      // Enable lint rules for React:
       reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
+
+      // Enable lint rules for React DOM:
       reactDom.configs.recommended,
     ],
     languageOptions: {
